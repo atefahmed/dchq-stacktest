@@ -2,21 +2,6 @@
 <img src="http://ww1.prweb.com/prfiles/2015/07/21/12907174/gI_146921_dchq-logo.png" alt="" />
 </figure>
 
-To run & manage the **28** Java application templates in this project on 13 different clouds and virtualization platforms (including vSphere, OpenStack, AWS, Rackspace, Microsoft Azure, Google Compute Engine, DigitalOcean, IBM SoftLayer, etc.), make sure that you either:
--   **Sign Up for FREE on DCHQ.io** -- <http://dchq.io> (no credit card required), or
--   **Download DCHQ On-Premise Standard Edition for FREE** -- <http://dchq.co/dchq-on-premise-download.html>
-
-
-
-### 3-Tier Java (Nginx – Tomcat – MySQL)
-
-[![Customize and Run](https://dl.dropboxusercontent.com/u/4090128/dchq-customize-and-run.png)](https://www.dchq.io/landing/products.html#/library?org=DCHQ&bl=2c91801a510732e101514af61cd74c28)
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<figure>
-<img src="http://ww1.prweb.com/prfiles/2015/07/21/12907174/gI_146921_dchq-logo.png" alt="" />
-</figure>
-
 To run & manage the Java application templates in this project on 18 different clouds and virtualization platforms (including vSphere, OpenStack, AWS, Rackspace, Microsoft Azure, Google Compute Engine, DigitalOcean, IBM SoftLayer, etc.), make sure that you either:
 -   **Sign Up for FREE on DCHQ.io** -- <http://dchq.io> (no credit card required), or
 -   **Download DCHQ On-Premise Standard Edition for FREE** -- <http://dchq.co/dchq-on-premise-download.html>
@@ -40,7 +25,7 @@ LB:
       arguments:
         - servers=server {{AppServer | container_ip}}:8080;
 AppServer:
-  image: jboss/wildfly:latest
+  image: tomcat:8.0.21-jre8
   mem_min: 600m
   host: host1
   cluster_size: 1
@@ -55,8 +40,8 @@ AppServer:
       restart: true
       arguments:
         - file_url=https://github.com/dchqinc/dchq-docker-java-example/raw/master/dbconnect.war
-        - dir=/opt/jboss/wildfly/standalone/deployments/ROOT.war
-        - delete_dir=/opt/jboss/wildfly/standalone/deployments/ROOT
+        - dir=/usr/local/tomcat/webapps/ROOT.war
+        - delete_dir=/usr/local/tomcat/webapps/ROOT
 MySQL:
   image: mysql:latest
   host: host1
@@ -65,7 +50,6 @@ MySQL:
     - MYSQL_USER=root
     - MYSQL_DATABASE=names
     - MYSQL_ROOT_PASSWORD={{alphanumeric|8}}
-
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
