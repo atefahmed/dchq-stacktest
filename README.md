@@ -22,16 +22,20 @@ LB:
     - !plugin
       id: 0H1Nk
       restart: true
+      lifecycle: on_create, post_scale_out:AppServer, post_scale_in:AppServer
       arguments:
-        - servers=server {{AppServer | container_ip}}:8080;
+        # Use container_private_ip if you're using Docker networking
+        - servers=server {{AppServer | container_private_ip}}:8080;
+        # Use container_hostname if you're using Weave networking
+        #- servers=server {{AppServer | container_hostname}}:8080;
 AppServer:
-  image: tomcat:8.0.21-jre8
+  image: jboss/wildfly:latest
   mem_min: 600m
   host: host1
   cluster_size: 1
   environment:
     - database_driverClassName=com.mysql.jdbc.Driver
-    - database_url=jdbc:mysql://{{MySQL|container_ip}}:3306/{{MySQL|MYSQL_DATABASE}}
+    - database_url=jdbc:mysql://{{MySQL|container_hostname}}:3306/{{MySQL|MYSQL_DATABASE}}
     - database_username={{MySQL|MYSQL_USER}}
     - database_password={{MySQL|MYSQL_ROOT_PASSWORD}}
   plugins:
@@ -40,8 +44,8 @@ AppServer:
       restart: true
       arguments:
         - file_url=https://github.com/dchqinc/dchq-docker-java-example/raw/master/dbconnect.war
-        - dir=/usr/local/tomcat/webapps/ROOT.war
-        - delete_dir=/usr/local/tomcat/webapps/ROOT
+        - dir=/opt/jboss/wildfly/standalone/deployments/ROOT.war
+        - delete_dir=/opt/jboss/wildfly/standalone/deployments/ROOT
 MySQL:
   image: mysql:latest
   host: host1
