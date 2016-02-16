@@ -51,6 +51,7 @@ MySQL:
     - MYSQL_DATABASE=names
     - MYSQL_ROOT_PASSWORD={{alphanumeric|8}}
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ### Environment Variable Bindings Across Images
 
