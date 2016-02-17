@@ -7,8 +7,7 @@ To run & manage the Java application templates in this project on 18 different c
 -   **Download DCHQ On-Premise Standard Edition for FREE** -- <http://dchq.co/dchq-on-premise-download.html>
 
 
-
-### 3-Tier Java (Nginx – Tomcat – MySQL)
+### DCHQ-Stacks #100: 3-Tier Java (Nginx – JBoss – MySQL)
 
 [![Customize and Run](https://dl.dropboxusercontent.com/u/4090128/dchq-customize-and-run.png)](https://www.dchq.io/landing/products.html#/library?org=DCHQ&bl=2c91801a510732e101514af61cd74c28)
 
@@ -54,6 +53,7 @@ MySQL:
     - MYSQL_USER=root
     - MYSQL_DATABASE=names
     - MYSQL_ROOT_PASSWORD={{alphanumeric|8}}
+
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
